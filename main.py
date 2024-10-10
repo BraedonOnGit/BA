@@ -1,19 +1,28 @@
 # This is a sample Python script.
-from pocketsphinx import LiveSpeech
 # Press Shift+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+import pocketsphinx as ps
 
 
 def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+    # Simulate speech input
+    speech_text = "Hello, World!"
 
-    for phrase in LiveSpeech():
-        print(phrase)
+    # Initialize the recognizer
+    config = ps.Decoder.default_config()
+    config.set_string('-hmm', '/path/to/pocketsphinx/model/en-us/en-us')
+    config.set_string('-lm', '/path/to/pocketsphinx/lm/en-us/en-us.lm.bin')
+    config.set_string('-dict', '/path/to/pocketsphinx/dict/cmudict-en-us.dict')
+
+    decoder = ps.Decoder(config)
+
+    # Process the simulated speech
+    result = decoder.decode(speech_text.encode(), True)
+
+    print("Recognized:", result[0][1])
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
+if __name__ == "__main__":
     print_hi('PyCharm')
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
