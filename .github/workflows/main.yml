@@ -1,0 +1,17 @@
+name: Test Workflow
+
+
+# Just to test the workflow process
+on:
+  push:
+    branches: [main]
+
+jobs:
+  print_test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Test Workflow
+        run: echo "Test"
