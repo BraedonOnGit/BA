@@ -1,17 +1,27 @@
-name: Test Workflow
+name: Continuous Integration
 
 
-# Just to test the workflow process
+# Starts workflow upon commit to main, directly or merged in (I think IDK)
 on:
   push:
-    branches: [main]
+    branches: [ main ]
 
 jobs:
-  print_test:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+    - uses: actions/checkout@v2
 
-      - name: Test Workflow
-        run: echo "Test"
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.9'
+
+    - name: Build Docker image
+      run: |
+        docker build -t my-app:$GITHUB_SHA .
+
+    - name: Test Docker image
+      run: |
+        docker run my-app:$GITHUB_SHA
