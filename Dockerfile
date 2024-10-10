@@ -6,8 +6,6 @@ WORKDIR /app
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
-    libasound2-dev \
-    libportaudio2 \
     && rm -rf /var/lib/apt/lists/*
 
 # Handle missing libportaudiocore1 package
