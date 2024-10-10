@@ -6,7 +6,9 @@ WORKDIR /app
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
-    git \
+    libasound2-dev \
+    libportaudio2 \
+    libportaudiocore1 \
     && rm -rf /var/lib/apt/lists/*
 
 # Copies all packages in requirements.txt and installs them.
