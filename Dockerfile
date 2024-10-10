@@ -8,8 +8,10 @@ WORKDIR /app
 RUN apt-get update && apt-get install -y \
     libasound2-dev \
     libportaudio2 \
-    libportaudiocore1 \
     && rm -rf /var/lib/apt/lists/*
+
+# Handle missing libportaudiocore1 package
+RUN echo "Package libportaudiocore1 is not available. Skipping installation." >> /dev/stderr
 
 # Copies all packages in requirements.txt and installs them.
 COPY requirements.txt .
